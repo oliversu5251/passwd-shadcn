@@ -22,8 +22,9 @@ A modern, secure password generator built with Next.js, TypeScript, and Shadcn U
 - **Clear History**: Easily clear your password history for privacy
 
 ### 🎨 Modern UI/UX
-- **Beautiful Design**: Gradient backgrounds with glassmorphism effects
+- **Theme Support**: Light, dark, and system theme modes with automatic detection
 - **Responsive Layout**: Works perfectly on desktop and mobile devices
+- **Sidebar Layout**: Password history displayed in a convenient sidebar on desktop
 - **Accessibility**: Full keyboard navigation and screen reader support
 - **Toast Notifications**: User-friendly feedback for all actions
 
@@ -34,6 +35,7 @@ A modern, secure password generator built with Next.js, TypeScript, and Shadcn U
 - **Styling**: Tailwind CSS
 - **UI Components**: Shadcn UI
 - **State Management**: React Hooks
+- **Theme Management**: next-themes
 - **Icons**: Lucide React
 
 ## Getting Started

@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
-import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 
 type PasswordOptions = {
@@ -22,10 +21,9 @@ type PasswordStrength = "weak" | "medium" | "strong" | "very-strong";
 
 interface PasswordGeneratorProps {
   onPasswordGenerated?: (password: string) => void;
-  onOptionsChanged?: (options: PasswordOptions) => void;
 }
 
-const PasswordGenerator = ({ onPasswordGenerated, onOptionsChanged }: PasswordGeneratorProps) => {
+const PasswordGenerator = ({ onPasswordGenerated }: PasswordGeneratorProps) => {
   const { toast } = useToast();
   const [password, setPassword] = useState<string>("");
   const [options, setOptions] = useState<PasswordOptions>({
@@ -67,8 +65,7 @@ const PasswordGenerator = ({ onPasswordGenerated, onOptionsChanged }: PasswordGe
 
   const updateOptions = useCallback((newOptions: PasswordOptions) => {
     setOptions(newOptions);
-    onOptionsChanged?.(newOptions);
-  }, [onOptionsChanged]);
+  }, []);
 
   const copyToClipboard = async () => {
     if (password) {
@@ -122,14 +119,14 @@ const PasswordGenerator = ({ onPasswordGenerated, onOptionsChanged }: PasswordGe
   const strength = getPasswordStrength();
 
   return (
-    <Card className="w-full bg-white/10 backdrop-blur-sm border-white/20">
+    <Card className="w-full">
       <CardHeader>
-        <CardTitle className="text-white text-center">Generate Password</CardTitle>
+        <CardTitle className="text-center">Generate Password</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Password Display */}
         <div className="space-y-2">
-          <Label htmlFor="password" className="text-white">
+          <Label htmlFor="password">
             Generated Password
           </Label>
           <div className="flex gap-2">
@@ -137,14 +134,12 @@ const PasswordGenerator = ({ onPasswordGenerated, onOptionsChanged }: PasswordGe
               id="password"
               value={password}
               readOnly
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
               placeholder="Click generate to create a password"
             />
             <Button
               onClick={copyToClipboard}
               disabled={!password}
               variant="outline"
-              className="border-white/20 text-white hover:bg-white/10"
             >
               Copy
             </Button>
@@ -154,9 +149,9 @@ const PasswordGenerator = ({ onPasswordGenerated, onOptionsChanged }: PasswordGe
         {/* Password Strength */}
         {password && (
           <div className="space-y-2">
-            <Label className="text-white">Password Strength</Label>
+            <Label>Password Strength</Label>
             <div className="flex items-center gap-2">
-              <div className="flex-1 h-2 bg-white/20 rounded-full overflow-hidden">
+              <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
                 <div
                   className={`h-full transition-all duration-300 ${getStrengthColor(
                     strength
@@ -173,14 +168,14 @@ const PasswordGenerator = ({ onPasswordGenerated, onOptionsChanged }: PasswordGe
                   }}
                 />
               </div>
-              <span className="text-sm text-white capitalize">{strength}</span>
+              <span className="text-sm capitalize">{strength}</span>
             </div>
           </div>
         )}
 
         {/* Password Length */}
         <div className="space-y-2">
-          <Label className="text-white">
+          <Label>
             Password Length: {options.length}
           </Label>
           <Slider
@@ -197,10 +192,10 @@ const PasswordGenerator = ({ onPasswordGenerated, onOptionsChanged }: PasswordGe
 
         {/* Password Options */}
         <div className="space-y-4">
-          <Label className="text-white">Password Options</Label>
+          <Label>Password Options</Label>
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <Label htmlFor="uppercase" className="text-white">
+              <Label htmlFor="uppercase">
                 Include Uppercase Letters
               </Label>
               <Switch
@@ -212,7 +207,7 @@ const PasswordGenerator = ({ onPasswordGenerated, onOptionsChanged }: PasswordGe
               />
             </div>
             <div className="flex items-center justify-between">
-              <Label htmlFor="lowercase" className="text-white">
+              <Label htmlFor="lowercase">
                 Include Lowercase Letters
               </Label>
               <Switch
@@ -224,7 +219,7 @@ const PasswordGenerator = ({ onPasswordGenerated, onOptionsChanged }: PasswordGe
               />
             </div>
             <div className="flex items-center justify-between">
-              <Label htmlFor="numbers" className="text-white">
+              <Label htmlFor="numbers">
                 Include Numbers
               </Label>
               <Switch
@@ -236,7 +231,7 @@ const PasswordGenerator = ({ onPasswordGenerated, onOptionsChanged }: PasswordGe
               />
             </div>
             <div className="flex items-center justify-between">
-              <Label htmlFor="symbols" className="text-white">
+              <Label htmlFor="symbols">
                 Include Symbols
               </Label>
               <Switch
@@ -253,7 +248,7 @@ const PasswordGenerator = ({ onPasswordGenerated, onOptionsChanged }: PasswordGe
         {/* Generate Button */}
         <Button
           onClick={generatePassword}
-          className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
+          className="w-full"
           disabled={
             !options.includeUppercase &&
             !options.includeLowercase &&

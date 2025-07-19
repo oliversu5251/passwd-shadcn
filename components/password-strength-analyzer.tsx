@@ -4,13 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface PasswordStrengthAnalyzerProps {
   password: string;
-  options: {
-    length: number;
-    includeUppercase: boolean;
-    includeLowercase: boolean;
-    includeNumbers: boolean;
-    includeSymbols: boolean;
-  };
 }
 
 interface StrengthCriteria {
@@ -19,7 +12,7 @@ interface StrengthCriteria {
   description: string;
 }
 
-const PasswordStrengthAnalyzer = ({ password, options }: PasswordStrengthAnalyzerProps) => {
+const PasswordStrengthAnalyzer = ({ password }: PasswordStrengthAnalyzerProps) => {
   if (!password) return null;
 
   const calculateStrength = () => {
@@ -158,25 +151,25 @@ const PasswordStrengthAnalyzer = ({ password, options }: PasswordStrengthAnalyze
   };
 
   return (
-    <Card className="w-full bg-white/10 backdrop-blur-sm border-white/20 mt-6">
+    <Card className="w-full mt-6">
       <CardHeader>
-        <CardTitle className="text-white text-center">Password Strength Analysis</CardTitle>
+        <CardTitle className="text-center">Password Strength Analysis</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         {/* Overall Strength */}
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-white text-sm">Overall Strength</span>
-            <span className="text-white font-semibold">{getStrengthLabel()}</span>
+            <span className="text-sm">Overall Strength</span>
+            <span className="font-semibold">{getStrengthLabel()}</span>
           </div>
-          <div className="w-full bg-white/20 rounded-full h-2">
+          <div className="w-full bg-muted rounded-full h-2">
             <div
               className={`h-2 rounded-full transition-all duration-300 ${getStrengthColor()}`}
               style={{ width: `${percentage}%` }}
             />
           </div>
           <div className="text-center">
-            <span className="text-white/70 text-xs">
+            <span className="text-muted-foreground text-xs">
               Score: {score}/{maxScore} ({percentage.toFixed(0)}%)
             </span>
           </div>
@@ -184,7 +177,7 @@ const PasswordStrengthAnalyzer = ({ password, options }: PasswordStrengthAnalyze
 
         {/* Criteria List */}
         <div className="space-y-2">
-          <h4 className="text-white text-sm font-medium">Strength Criteria</h4>
+          <h4 className="text-sm font-medium">Strength Criteria</h4>
           <div className="space-y-1">
             {criteria.map((criterion, index) => (
               <div key={index} className="flex items-center gap-2">
@@ -193,16 +186,16 @@ const PasswordStrengthAnalyzer = ({ password, options }: PasswordStrengthAnalyze
                     criterion.met ? "bg-green-500" : "bg-red-500"
                   }`}
                 />
-                <span className="text-white/80 text-xs">{criterion.description}</span>
+                <span className="text-muted-foreground text-xs">{criterion.description}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Security Tips */}
-        <div className="bg-white/5 rounded-lg p-3">
-          <h4 className="text-white text-sm font-medium mb-2">Security Tips</h4>
-          <ul className="text-white/70 text-xs space-y-1">
+        <div className="bg-muted/50 rounded-lg p-3">
+          <h4 className="text-sm font-medium mb-2">Security Tips</h4>
+          <ul className="text-muted-foreground text-xs space-y-1">
             <li>• Use a unique password for each account</li>
             <li>• Consider using a password manager</li>
             <li>• Enable two-factor authentication when possible</li>

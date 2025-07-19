@@ -29,7 +29,7 @@ const PasswordHistory = ({ currentPassword }: PasswordHistoryProps) => {
         title: "Password copied!",
         description: "Password has been copied to your clipboard.",
       });
-    } catch (err) {
+    } catch {
       toast({
         title: "Copy failed",
         description: "Failed to copy password to clipboard.",
@@ -51,14 +51,13 @@ const PasswordHistory = ({ currentPassword }: PasswordHistoryProps) => {
   }
 
   return (
-    <Card className="w-full bg-white/10 backdrop-blur-sm border-white/20 mt-6">
+    <Card className="w-full">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-white text-sm">Recent Passwords</CardTitle>
+        <CardTitle className="text-sm">Recent Passwords</CardTitle>
         <Button
           onClick={clearHistory}
           variant="ghost"
           size="sm"
-          className="text-white/70 hover:text-white hover:bg-white/10"
         >
           Clear
         </Button>
@@ -67,16 +66,15 @@ const PasswordHistory = ({ currentPassword }: PasswordHistoryProps) => {
         {history.map((password, index) => (
           <div
             key={index}
-            className="flex items-center justify-between p-2 bg-white/5 rounded-md"
+            className="flex items-center justify-between p-2 bg-muted/50 rounded-md"
           >
-            <code className="text-sm text-white/80 font-mono flex-1 mr-2">
+            <code className="text-sm text-muted-foreground font-mono flex-1 mr-2">
               {password}
             </code>
             <Button
               onClick={() => copyPassword(password)}
               variant="ghost"
               size="sm"
-              className="text-white/70 hover:text-white hover:bg-white/10"
             >
               Copy
             </Button>
